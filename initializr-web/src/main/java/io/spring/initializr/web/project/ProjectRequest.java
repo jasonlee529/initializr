@@ -26,6 +26,8 @@ import org.springframework.util.StringUtils;
  *
  * @author Stephane Nicoll
  */
+@lombok.Getter
+@lombok.Setter
 public class ProjectRequest {
 
 	private List<String> dependencies = new ArrayList<>();
@@ -53,7 +55,11 @@ public class ProjectRequest {
 	private String packageName;
 
 	private String javaVersion;
-
+	private String jdbcHost;
+	private String jdbcPort;
+	private String jdbcDb;
+	private String jdbcUsername;
+	private String jdbcPassword;
 	// The base directory to create in the archive - no baseDir by default
 	private String baseDir;
 

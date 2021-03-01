@@ -30,6 +30,8 @@ import org.springframework.util.StringUtils;
  * @author Stephane Nicoll
  */
 @ConfigurationProperties(prefix = "initializr")
+@lombok.Getter
+@lombok.Setter
 public class InitializrProperties extends InitializrConfiguration {
 
 	/**
@@ -72,7 +74,7 @@ public class InitializrProperties extends InitializrConfiguration {
 	 * GroupId metadata.
 	 */
 	@JsonIgnore
-	private final SimpleElement groupId = new SimpleElement("com.example");
+	private final SimpleElement groupId = new SimpleElement("cn.infisa");
 
 	/**
 	 * ArtifactId metadata.
@@ -96,13 +98,28 @@ public class InitializrProperties extends InitializrConfiguration {
 	 * Description metadata.
 	 */
 	@JsonIgnore
-	private final SimpleElement description = new SimpleElement("Demo project for Spring Boot");
+	private final SimpleElement description = new SimpleElement("XXX project for Spring Boot");
 
 	/**
 	 * Package name metadata.
 	 */
 	@JsonIgnore
 	private final SimpleElement packageName = new SimpleElement(null);
+
+	@JsonIgnore
+	private final SimpleElement jdbcHost = new SimpleElement("192.168.1.");
+
+	@JsonIgnore
+	private final SimpleElement jdbcPort = new SimpleElement("3306");
+
+	@JsonIgnore
+	private final SimpleElement jdbcDb = new SimpleElement("test");
+
+	@JsonIgnore
+	private final SimpleElement jdbcUsername = new SimpleElement("web_");
+
+	@JsonIgnore
+	private final SimpleElement jdbcPassword = new SimpleElement("1qaz@WSX");
 
 	public List<DependencyGroup> getDependencies() {
 		return this.dependencies;

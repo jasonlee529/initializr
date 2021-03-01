@@ -33,187 +33,200 @@ import org.springframework.util.StringUtils;
  *
  * @author Andy Wilkinson
  */
+@lombok.Getter
+@lombok.Setter
 public class MutableProjectDescription implements ProjectDescription {
 
-	private Version platformVersion;
+    private Version platformVersion;
 
-	private BuildSystem buildSystem;
+    private BuildSystem buildSystem;
 
-	private Packaging packaging;
+    private Packaging packaging;
 
-	private Language language;
+    private Language language;
 
-	private final Map<String, Dependency> requestedDependencies = new LinkedHashMap<>();
+    private final Map<String, Dependency> requestedDependencies = new LinkedHashMap<>();
 
-	private String groupId;
+    private String groupId;
 
-	private String artifactId;
+    private String artifactId;
 
-	private String version;
+    private String version;
 
-	private String name;
+    private String name;
 
-	private String description;
+    private String description;
 
-	private String applicationName;
+    private String applicationName;
 
-	private String packageName;
+    private String packageName;
 
-	private String baseDirectory;
+    private String baseDirectory;
 
-	public MutableProjectDescription() {
-	}
+    private String jdbcHost;
+    private String jdbcPort;
+    private String jdbcDb;
+    private String jdbcUsername;
+    private String jdbcPassword;
 
-	/**
-	 * Create a new instance with the state of the specified {@code source}.
-	 * @param source the source description to initialize this instance with
-	 */
-	protected MutableProjectDescription(MutableProjectDescription source) {
-		this.platformVersion = source.getPlatformVersion();
-		this.buildSystem = source.getBuildSystem();
-		this.packaging = source.getPackaging();
-		this.language = source.getLanguage();
-		this.requestedDependencies.putAll(source.getRequestedDependencies());
-		this.groupId = source.getGroupId();
-		this.artifactId = source.getArtifactId();
-		this.version = source.getVersion();
-		this.name = source.getName();
-		this.description = source.getDescription();
-		this.applicationName = source.getApplicationName();
-		this.packageName = source.getPackageName();
-		this.baseDirectory = source.getBaseDirectory();
-	}
+    public MutableProjectDescription() {
+    }
 
-	@Override
-	public MutableProjectDescription createCopy() {
-		return new MutableProjectDescription(this);
-	}
+    /**
+     * Create a new instance with the state of the specified {@code source}.
+     *
+     * @param source the source description to initialize this instance with
+     */
+    protected MutableProjectDescription(MutableProjectDescription source) {
+        this.platformVersion = source.getPlatformVersion();
+        this.buildSystem = source.getBuildSystem();
+        this.packaging = source.getPackaging();
+        this.language = source.getLanguage();
+        this.requestedDependencies.putAll(source.getRequestedDependencies());
+        this.groupId = source.getGroupId();
+        this.artifactId = source.getArtifactId();
+        this.version = source.getVersion();
+        this.name = source.getName();
+        this.description = source.getDescription();
+        this.applicationName = source.getApplicationName();
+        this.packageName = source.getPackageName();
+        this.baseDirectory = source.getBaseDirectory();
+        this.jdbcDb = source.getJdbcDb();
+        this.jdbcHost = source.getJdbcHost();
+        this.jdbcPassword = source.getJdbcPassword();
+        this.jdbcUsername = source.getJdbcUsername();
+    }
 
-	@Override
-	public Version getPlatformVersion() {
-		return this.platformVersion;
-	}
+    @Override
+    public MutableProjectDescription createCopy() {
+        return new MutableProjectDescription(this);
+    }
 
-	public void setPlatformVersion(Version platformVersion) {
-		this.platformVersion = platformVersion;
-	}
+    @Override
+    public Version getPlatformVersion() {
+        return this.platformVersion;
+    }
 
-	@Override
-	public BuildSystem getBuildSystem() {
-		return this.buildSystem;
-	}
+    public void setPlatformVersion(Version platformVersion) {
+        this.platformVersion = platformVersion;
+    }
 
-	public void setBuildSystem(BuildSystem buildSystem) {
-		this.buildSystem = buildSystem;
-	}
+    @Override
+    public BuildSystem getBuildSystem() {
+        return this.buildSystem;
+    }
 
-	@Override
-	public Packaging getPackaging() {
-		return this.packaging;
-	}
+    public void setBuildSystem(BuildSystem buildSystem) {
+        this.buildSystem = buildSystem;
+    }
 
-	public void setPackaging(Packaging packaging) {
-		this.packaging = packaging;
-	}
+    @Override
+    public Packaging getPackaging() {
+        return this.packaging;
+    }
 
-	@Override
-	public Language getLanguage() {
-		return this.language;
-	}
+    public void setPackaging(Packaging packaging) {
+        this.packaging = packaging;
+    }
 
-	public void setLanguage(Language language) {
-		this.language = language;
-	}
+    @Override
+    public Language getLanguage() {
+        return this.language;
+    }
 
-	public Dependency addDependency(String id, Dependency dependency) {
-		return this.requestedDependencies.put(id, dependency);
-	}
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 
-	public Dependency addDependency(String id, Dependency.Builder<?> builder) {
-		return addDependency(id, builder.build());
-	}
+    public Dependency addDependency(String id, Dependency dependency) {
+        return this.requestedDependencies.put(id, dependency);
+    }
 
-	@Override
-	public Map<String, Dependency> getRequestedDependencies() {
-		return Collections.unmodifiableMap(this.requestedDependencies);
-	}
+    public Dependency addDependency(String id, Dependency.Builder<?> builder) {
+        return addDependency(id, builder.build());
+    }
 
-	@Override
-	public String getGroupId() {
-		return this.groupId;
-	}
+    @Override
+    public Map<String, Dependency> getRequestedDependencies() {
+        return Collections.unmodifiableMap(this.requestedDependencies);
+    }
 
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
-	}
+    @Override
+    public String getGroupId() {
+        return this.groupId;
+    }
 
-	@Override
-	public String getArtifactId() {
-		return this.artifactId;
-	}
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 
-	public void setArtifactId(String artifactId) {
-		this.artifactId = artifactId;
-	}
+    @Override
+    public String getArtifactId() {
+        return this.artifactId;
+    }
 
-	@Override
-	public String getVersion() {
-		return this.version;
-	}
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    @Override
+    public String getVersion() {
+        return this.version;
+    }
 
-	@Override
-	public String getName() {
-		return this.name;
-	}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Override
+    public String getName() {
+        return this.name;
+    }
 
-	@Override
-	public String getDescription() {
-		return this.description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
 
-	@Override
-	public String getApplicationName() {
-		return this.applicationName;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setApplicationName(String applicationName) {
-		this.applicationName = applicationName;
-	}
+    @Override
+    public String getApplicationName() {
+        return this.applicationName;
+    }
 
-	@Override
-	public String getPackageName() {
-		if (StringUtils.hasText(this.packageName)) {
-			return this.packageName;
-		}
-		if (StringUtils.hasText(this.groupId) && StringUtils.hasText(this.artifactId)) {
-			return this.groupId + "." + this.artifactId;
-		}
-		return null;
-	}
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
 
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
+    @Override
+    public String getPackageName() {
+        if (StringUtils.hasText(this.packageName)) {
+            return this.packageName;
+        }
+        if (StringUtils.hasText(this.groupId) && StringUtils.hasText(this.artifactId)) {
+            return this.groupId + "." + this.artifactId;
+        }
+        return null;
+    }
 
-	@Override
-	public String getBaseDirectory() {
-		return this.baseDirectory;
-	}
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
 
-	public void setBaseDirectory(String baseDirectory) {
-		this.baseDirectory = baseDirectory;
-	}
+    @Override
+    public String getBaseDirectory() {
+        return this.baseDirectory;
+    }
+
+    public void setBaseDirectory(String baseDirectory) {
+        this.baseDirectory = baseDirectory;
+    }
 
 }
