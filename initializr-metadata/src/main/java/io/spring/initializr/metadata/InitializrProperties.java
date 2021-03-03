@@ -113,7 +113,7 @@ public class InitializrProperties extends InitializrConfiguration {
 	private final SimpleElement jdbcPort = new SimpleElement("3306");
 
 	@JsonIgnore
-	private final SimpleElement jdbcDb = new SimpleElement("test");
+	private final SimpleElement jdbcDb = new SimpleElement("web_");
 
 	@JsonIgnore
 	private final SimpleElement jdbcUsername = new SimpleElement("web_");

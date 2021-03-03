@@ -36,6 +36,15 @@ public class ApplicationConfigurationProjectGenerationConfiguration {
 	}
 
 	@Bean
+	public Log4jdbcPropertiesContributor log4jdbcPropertiesContributor() {
+		return new Log4jdbcPropertiesContributor();
+	}
+
+	@Bean
+	public Sfl4jContributor sfl4jContributor(Build build, InitializrMetadata metadata) {
+		return new Sfl4jContributor(build, metadata);
+	}
+	@Bean
 	public WebFoldersContributor webFoldersContributor(Build build, InitializrMetadata metadata) {
 		return new WebFoldersContributor(build, metadata);
 	}

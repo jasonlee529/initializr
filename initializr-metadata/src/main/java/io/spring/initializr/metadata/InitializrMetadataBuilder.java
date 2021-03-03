@@ -178,6 +178,11 @@ public final class InitializrMetadataBuilder {
 			this.properties.getName().apply(metadata.getName());
 			this.properties.getDescription().apply(metadata.getDescription());
 			this.properties.getPackageName().apply(metadata.getPackageName());
+			this.properties.getJdbcHost().apply(metadata.getJdbcHost());
+			this.properties.getJdbcPort().apply(metadata.getJdbcPort());
+			this.properties.getJdbcDb().apply(metadata.getJdbcDb());
+			this.properties.getJdbcUsername().apply(metadata.getJdbcUsername());
+			this.properties.getJdbcPassword().apply(metadata.getJdbcPassword());
 		}
 
 	}
