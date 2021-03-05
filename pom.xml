@@ -37,6 +37,7 @@
         </developer>
     </developers>
 
+<<<<<<< HEAD
     <properties>
         <revision>0.10.0-SNAPSHOT</revision>
         <disable.checks>false</disable.checks>
@@ -46,6 +47,17 @@
         <main.basedir>${basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+=======
+	<properties>
+		<revision>0.11.0-SNAPSHOT</revision>
+		<disable.checks>false</disable.checks>
+		<git.url>https://github.com/spring-io/initializr</git.url>
+		<git.connection>scm:git:https://github.com/spring-io/initializr</git.connection>
+		<git.developerConnection>scm:git:ssh://git@github.com/spring-io/initializr.git</git.developerConnection>
+		<main.basedir>${basedir}</main.basedir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+>>>>>>> db0adbbb38919ea9465344fc0ddeb249454ddd63
 
     <modules>
         <module>initializr-actuator</module>

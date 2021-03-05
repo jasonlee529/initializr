@@ -48,12 +48,12 @@ resource_types:
   type: registry-image
   source:
     repository: springio/artifactory-resource
-    tag: 0.0.12
+    tag: 0.0.13
 - name: pull-request
   type: registry-image
   source:
     repository: teliaoss/github-pr-resource
-    tag: v0.21.0
+    tag: v0.23.0
 - name: github-status-resource
   type: registry-image
   source:
@@ -342,7 +342,6 @@ jobs:
   - task: stage
     image: ci-image
     file: git-repo/ci/tasks/stage.yml
-  - put: artifactory-repo
     params:
       RELEASE_TYPE: RELEASE
   - put: artifactory-repo
