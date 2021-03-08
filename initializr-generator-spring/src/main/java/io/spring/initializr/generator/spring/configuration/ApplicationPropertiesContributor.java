@@ -16,7 +16,18 @@
 
 package io.spring.initializr.generator.spring.configuration;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
+import io.spring.initializr.generator.buildsystem.Build;
 import io.spring.initializr.generator.project.contributor.SingleResourceProjectContributor;
+import io.spring.initializr.generator.spring.build.BuildMetadataResolver;
+import io.spring.initializr.metadata.InitializrMetadata;
+
+import org.springframework.core.io.Resource;
+import org.springframework.util.FileCopyUtils;
 
 /**
  * A {@link SingleResourceProjectContributor} that contributes a
@@ -25,13 +36,28 @@ import io.spring.initializr.generator.project.contributor.SingleResourceProjectC
  * @author Stephane Nicoll
  */
 public class ApplicationPropertiesContributor extends SingleResourceProjectContributor {
+	private final Build build;
 
-	public ApplicationPropertiesContributor() {
-		this("classpath:configuration/application.properties");
+	private final BuildMetadataResolver buildMetadataResolver;
+
+	public ApplicationPropertiesContributor(Build build, InitializrMetadata metadata) {
+		this("classpath:configuration/application.properties", build, metadata);
 	}
 
-	public ApplicationPropertiesContributor(String resourcePattern) {
+	public ApplicationPropertiesContributor(String resourcePattern, Build build, InitializrMetadata metadata) {
 		super("src/main/resources/application.properties", resourcePattern);
+		this.build = build;
+		this.buildMetadataResolver = new BuildMetadataResolver(metadata);
 	}
 
+	@Override
+	public void contribute(Path projectRoot) throws IOException {
+		Path output = projectRoot.resolve(this.relativePath);
+		if (!Files.exists(output)) {
+			Files.createDirectories(output.getParent());
+			Files.createFile(output);
+		}
+		Resource resource = this.resolver.getResource(this.resourcePattern);
+		FileCopyUtils.copy(resource.getInputStream(), Files.newOutputStream(output, StandardOpenOption.APPEND));
+	}
 }

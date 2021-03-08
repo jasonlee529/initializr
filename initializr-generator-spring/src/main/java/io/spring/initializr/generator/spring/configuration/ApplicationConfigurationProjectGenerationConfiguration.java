@@ -31,8 +31,8 @@ import org.springframework.context.annotation.Bean;
 public class ApplicationConfigurationProjectGenerationConfiguration {
 
 	@Bean
-	public ApplicationPropertiesContributor applicationPropertiesContributor() {
-		return new ApplicationPropertiesContributor();
+	public ApplicationPropertiesContributor applicationPropertiesContributor(Build build, InitializrMetadata metadata) {
+		return new ApplicationPropertiesContributor(build, metadata);
 	}
 
 	@Bean
@@ -44,6 +44,7 @@ public class ApplicationConfigurationProjectGenerationConfiguration {
 	public Sfl4jContributor sfl4jContributor(Build build, InitializrMetadata metadata) {
 		return new Sfl4jContributor(build, metadata);
 	}
+
 	@Bean
 	public WebFoldersContributor webFoldersContributor(Build build, InitializrMetadata metadata) {
 		return new WebFoldersContributor(build, metadata);

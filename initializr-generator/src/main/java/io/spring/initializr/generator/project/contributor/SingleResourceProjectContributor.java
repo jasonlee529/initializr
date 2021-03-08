@@ -34,11 +34,11 @@ import org.springframework.util.FileCopyUtils;
  */
 public class SingleResourceProjectContributor implements ProjectContributor {
 
-	private final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+	protected final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-	private final String relativePath;
+	protected final String relativePath;
 
-	private final String resourcePattern;
+	protected final String resourcePattern;
 
 	/**
 	 * Create a new instance.
