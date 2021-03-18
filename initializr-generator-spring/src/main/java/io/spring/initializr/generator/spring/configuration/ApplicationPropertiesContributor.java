@@ -52,6 +52,8 @@ public class ApplicationPropertiesContributor extends SingleResourceProjectContr
 
 	@Override
 	public void contribute(Path projectRoot) throws IOException {
+		String artifactId = this.build.getSettings().getArtifact();
+
 		Path output = projectRoot.resolve(this.relativePath);
 		if (!Files.exists(output)) {
 			Files.createDirectories(output.getParent());
